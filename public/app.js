@@ -126,17 +126,8 @@ app.controller('todaysFundingCtrl', function($scope, $http) {
 
 app.controller('originationMapCtrl', function($scope, $http) {
 
-
-	var markers = [];
-
-
-
-	// Dynamically insert the CSS style required for the markers with label.
-
-
 	$scope.$on('mapInitialized', function(event, map) {
-
-		
+	
 
 		$http.get('/api/mortgages/today')
 			.success(function(data) {
@@ -153,22 +144,6 @@ app.controller('originationMapCtrl', function($scope, $http) {
 						marker.setPosition(loc);
 						marker.setMap(map);
 
-
-						//$scope.
-
-						// var _marker = {
-						// 	options: {
-						// 		draggable: true,
-						// 		labelAnchor: '10 39',
-						// 		labelContent: Math.random(),
-						// 		labelClass: 'labelMarker'
-						// 	},
-						// 	latitude: mortgage.lat,
-						// 	longitude: mortgage.lng,
-						// 	title: 'm' + index
-						// };
-						// console.log(map);
-						// $scope.markers.push(_marker);
 					}
 				})
 
@@ -177,43 +152,4 @@ app.controller('originationMapCtrl', function($scope, $http) {
 				console.log('Error: ', data);
 			});
 	})
-
-	$scope.markers = [];
-
-
-
-	// $scope.$watch(function() {
-	// 		return $scope.map.bounds;
-	// 	},
-	// 	function(nv, ov) {
-	// 		console.log('The map is ready');
-	// 		//load todays transactions, and place the markers;
-	// 		$http.get('/api/mortgages/today')
-	// 			.success(function(data) {
-	// 				$.each(data, function(index, mortgage) {
-	// 					if (mortgage.lat != null && mortgage.lat > 0) {
-	// 						var _marker = {
-	// 							options: {
-	// 								draggable: true,
-	// 								labelAnchor: '10 39',
-	// 								labelContent: Math.random(),
-	// 								labelClass: 'labelMarker'
-	// 							},
-	// 							latitude: mortgage.lat,
-	// 							longitude: mortgage.lng,
-	// 							title: 'm' + index
-	// 						};
-	// 						console.log('pushing ', _marker);
-	// 						$scope.markers.push(_marker);
-	// 					}
-	// 				})
-
-	// 			})
-	// 			.error(function(data) {
-	// 				console.log('Error: ', data);
-	// 			});
-	// 	}, true);
-
-
-
 });
