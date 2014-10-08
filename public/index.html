@@ -21,13 +21,12 @@
         <script type="text/javascript" src=".\app.js"></script>
     </head>
 
-    <body ng-controller="MyCtrl">
+    <body>
 
         <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
-            
+
 
             <div class="container">
-            
 
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,7 +37,7 @@
                     </button>
                     <a class="navbar-brand" href="#">N-Abler Dashboard</a>
                 </div>
-            
+
                 <div class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right" role="form">
                         <div class="form-group">
@@ -54,42 +53,42 @@
             </div>
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
-            <div class="jumbotron">
+            <!--             <div class="jumbotron">
                 <div class="container">
                     <h1>Hello, world!</h1>
                     <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                     <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
                 </div>
-            </div>
-
-            <div class="container">
+            </div> -->
+            <div class="container-fluid dashboard-container">
                 <!-- Example row of columns -->
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="row" >
+                    <div class="col-md-6" ng-controller="todaysTransactionsCtrl">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3>Todays Transactions <span class="label label-info">{{ myData.length }}</span></h3>
+                                <h3>Todays Transactions <span class="label label-info">{{ todays.length }}</span></h3>
                             </div>
-                            <div class="panel-body" ng-grid="gridOptions">
+                            <div class="panel-body gridStyle" ng-grid="gridOptions">
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3" ng-controller="todaysOriginationsCtrl">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3>Orphaned Transactions</h3>
+                                <h3>Orginations  <span class="label label-info">{{ totalOriginations }}</span></h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body gridStyle" ng-grid="originationGridOptions">
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3" ng-controller="todaysFundingCtrl">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3>Weekly Volume</h3>
+                                <h3>Fundings <span class="label label-info">{{ totalFundings }}</span></h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
                             </div>
                         </div>
                     </div>

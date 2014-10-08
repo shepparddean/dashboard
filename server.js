@@ -6,18 +6,14 @@
 // call the packages we need
 var express        = require('express'); // call express
 var app            = express(); // define our app using express
-var mongoose       = require('mongoose'); // mongoose for mongodb
+var sql            = require('mssql'); // microsoft sql driver
 var morgan         = require('morgan'); // log requests to the console (express4)
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
-//load the config
-var database = require('./config/database');
 
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-mongoose.connect(database.url); // connect to our database
+
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(morgan('dev')); // log every request to the console
