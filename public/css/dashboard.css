@@ -1,9 +1,12 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-}
 
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
 .dashboard-container {
-	padding-top: 50px;
+    padding-top: 50px;
+}
+.angular-google-map-container {
+    height: 400px;
 }

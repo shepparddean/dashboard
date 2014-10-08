@@ -27,7 +27,8 @@ module.exports = function(app) {
             ' P.City as City, ' +
             '  M.MortgagePriority,  ' +
             '  F.InputDate,DateDiff(day,InputDate,GetDate())+1 As Days, ' +
-            ' P.latitude AS lat,P.longitude AS lng, ' +
+            ' P.latitude AS lat, ' +
+            ' P.longitude AS lng, ' +
             '  P.StreetName AS Title, ' +
             "  (select COUNT(*) from Offer where Offer.FileID = F.FileID and Offer.Status <> 'Incomplete') as totalOffers "   + 
 			' FROM [File] AS F ' +
