@@ -27,7 +27,7 @@ angular.module('transactionController', [])
 			field: 'totalOffers',
 			displayName: 'Offers',
 			cellClass: 'text-center',
-			cellTemplate: '<a ui-sref="offers/100234" href="#/offers/100234"><h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5></a>'
+			cellTemplate: '<div ui-sref="offers({transactionId: row.entity.TransactionID})"><h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5></div>'
 		}]
 
 
@@ -43,7 +43,8 @@ angular.module('transactionController', [])
 		});
 
 	$scope.loadOffers = function(row) {
-		$stateProvider.go('#/offers/' + row.entity.TransactionID);
+		console.log('You bet');
+		//$stateProvider.go('#/offers/' + row.entity.TransactionID);
 		//$window.location.href = '/views/transactionOffers/' + row.entity.TransactionID;
 	}
 
