@@ -1,6 +1,6 @@
 angular.module('transactionController', [])
 
-.controller('transactionsCtrl', function($scope, $http, Originations) {
+.controller('transactionsCtrl', function($scope, $http,  Originations) {
 
 	$scope.todays = {};
 
@@ -8,6 +8,7 @@ angular.module('transactionController', [])
 		data: 'todays',
 		enablePaging: true,
 		showFooter: false,
+		multiSelect: false,
 		columnDefs: [{
 			field: 'TransactionID',
 			displayName: 'ID'
@@ -26,7 +27,7 @@ angular.module('transactionController', [])
 			field: 'totalOffers',
 			displayName: 'Offers',
 			cellClass: 'text-center',
-			cellTemplate: '<h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5>'
+			cellTemplate: '<a ui-sref="offers/100234" href="#/offers/100234"><h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5></a>'
 		}]
 
 
@@ -40,6 +41,12 @@ angular.module('transactionController', [])
 		.error(function(data) {
 			console.log('Error: ', data);
 		});
+
+	$scope.loadOffers = function(row) {
+		$stateProvider.go('#/offers/' + row.entity.TransactionID);
+		//$window.location.href = '/views/transactionOffers/' + row.entity.TransactionID;
+	}
+
 })
 
 .controller('gradeTierCtrl', function($scope, $http, Originations) {
@@ -58,12 +65,12 @@ angular.module('transactionController', [])
 			field: 'tradingGrade',
 			displayName: 'Grade'
 		}, {
-			field: 'percent',
-			displayName: '%',
-			cellClass: 'text-center'
-		}, {
 			field: 'total',
 			displayName: '#',
+			cellClass: 'text-center'
+		}, {
+			field: 'percent',
+			displayName: '%',
 			cellClass: 'text-center'
 		}]
 	};
@@ -167,3 +174,86 @@ angular.module('transactionController', [])
 
 
 })
+
+
+.controller('transactionOffersCtrl', function($scope, $http, $stateParams, Originations) {
+
+
+	console.log('What now..');
+
+	$scope.offers = {};
+
+	$scope.gridOptions = {
+		data: 'offers',
+		enablePaging: true,
+		showFooter: false,
+		columnDefs: [{
+			field: 'FileID',
+			displayName: 'ID'
+		}, {
+			field: 'OfferID',
+			displayName: 'Offer ID'
+
+		}, {
+			field: 'Status',
+			displayName: 'Status'
+
+		}, {
+			field: 'Amount',
+			displayName: 'Amount',
+			cellFilter: 'currency',
+			cellClass: 'text-right'
+
+		}, {
+			field: 'Rate',
+			displayName: 'Rate',
+			cellClass: 'text-center'
+
+		}, {
+			field: 'Term',
+			displayName: 'Term',
+			cellClass: 'text-center'
+
+		}, {
+			field: 'Amortization',
+			displayName: 'Amortization',
+			cellClass: 'text-center'
+
+		}, {
+			field: 'LenderFee',
+			displayName: 'Fee',
+			cellFilter: 'currency',
+			cellClass: 'text-right'
+		}, {
+			field: 'PaymentAmount',
+			displayName: 'Payment',
+			cellFilter: 'currency',
+			cellClass: 'text-right'
+
+		}, {
+			field: 'DecisionDate',
+			displayName: 'Decision Date',
+			cellFilter: 'date'
+		}, {
+			field: 'PaymentFrequency',
+			displayName: 'Frequency'
+		}]
+
+
+	};
+
+	Originations.getTransactionOffers($stateParams.transactionId)
+		.success(function(data) {
+			$scope.offers = data;
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+
+
+
+
+
+});

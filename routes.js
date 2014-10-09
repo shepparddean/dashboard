@@ -14,7 +14,7 @@ module.exports = function(app) {
 	 * This method returns all of the mortgages created today
 	 *
 	 * Currently returns ALL transactions
-	 * 
+	 *
 	 * @param  {[type]} req
 	 * @param  {[type]} res
 	 * @return {[type]}
@@ -145,12 +145,45 @@ module.exports = function(app) {
 
 				" select	count(F.FileID) as Total, P.PropertyUse " +
 				"	from	[File] as F, Offer as O, " +
-		 		"			Property as P " +
+				"			Property as P " +
 				"	where	O.Status = 'Accepted'" +
 				"	and		F.Status = 'Closed'" +
 				"	and		O.FileID = F.FileID" +
 				"	and		P.FileID = F.FileID" +
 				"	group by P.PropertyUse";
+
+			request.query(sqlQuery, function(err, recordset) {
+				if (err) {
+					res.send(err);
+				} else {
+					res.send(recordset);
+				}
+			});
+
+		});
+
+	});
+
+
+
+	/**
+	 * Gets the offer details for a specific transaction;
+	 *
+	 * @param  {[type]} req
+	 * @param  {[type]} res
+	 * @return {[type]}
+	 */
+	app.get('/api/offers/:transactionId', function(req, res) {
+			
+
+
+		var connection = new sql.Connection(database, function(err) {
+			var request = new sql.Request(connection);
+			var sqlQuery =
+
+				" select * from Offer " +
+				" where FileID = " + req.params.transactionId + 
+				" and Status <> 'Incomplete'";
 
 			request.query(sqlQuery, function(err, recordset) {
 				if (err) {

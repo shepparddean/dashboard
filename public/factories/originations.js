@@ -14,6 +14,10 @@ angular.module('originationService', [])
 			return $http.get('/api/mortgages/today');
 		},
 
+		getTransactionOffers: function(transactionId) {
+			return $http.get('/api/offers/' + transactionId);
+		},
+
 		getFundings: function() {
 			return $http.get('/api/fundings/today');
 		},

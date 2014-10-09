@@ -1,0 +1,83 @@
+<div class="row" >
+    <div class="col-md-6" ng-controller="transactionsCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Transactions <span class="label label-info">{{ todays.length }}</span></h3>
+            </div>
+            <div class="panel-body gridStyle" ng-grid="gridOptions">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" ng-controller="originationCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Orginations  <span class="label label-info">{{ totalOriginations }}</span></h3>
+            </div>
+            <div class="panel-body gridStyle" ng-grid="originationGridOptions">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" ng-controller="fundingCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Fundings <span class="label label-info">{{ totalFundings }}</span></h3>
+            </div>
+            <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col-md-6" ng-controller="mapCtrl" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Map <span class="label label-info">{{ total }}</span></h3>
+            </div>
+            <div class="panel-body">
+                <map style="display:block; height:300px" center="[43.7,-79.4]" zoom="6"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" ng-controller="propertyUseCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Property Usage <span class="label label-info">{{ total }}</span></h3>
+            </div>
+            <div class="panel-body"  style="height: 330px" >
+                <nvd3-pie-chart
+                data       ="data"
+                id         ="id"
+
+                x          ="xFunction()"
+                y          ="yFunction()"
+                showLegend = "true"
+                tooltips   = "true"
+                labelType  = "percent"
+                pieLabelsOutside = "true"
+                donut      = "false"
+                donutRatio = ".25"
+                showLabels ="true">
+                <svg height="300"></svg>
+                </nvd3-pie-chart>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" >
+    <div class="col-md-4" ng-controller="gradeTierCtrl" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Grades <span class="label label-info">{{ total }}</span></h3>
+            </div>
+             <div class="panel-body gridStyle" ng-grid="gridOptions">
+                
+            </div>
+        </div>
+    </div>
+</div>
