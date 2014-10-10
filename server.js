@@ -27,7 +27,12 @@ app.use(bodyParser.json({
 app.use(methodOverride());
 
 //load the routes
-require('./routes')(app);
+require('./routes/applications')(app);
+require('./routes/fundings')(app);
+require('./routes/offers')(app);
+require('./routes/companies')(app);
+require('./routes/users')(app);
+
 
 
 

@@ -14,6 +14,12 @@
         <link rel="stylesheet" type="text/css" href="/css/ng-grid.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/nv.d3.min.css" />
+        <!-- Custom CSS -->
+        <link href="/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 
         <script type="text/javascript" src="/release/jquery.min.js"></script>
         <script type="text/javascript" src="/release/angular.min.js"></script>
@@ -28,10 +34,10 @@
         <script type="text/javascript" src='/release/angularjs-nvd3-directives.min.js'></script>
         <script type="text/javascript" src='/release/angular-ui-router.min.js'></script>
 
-
-
         <script type="text/javascript" src="/factories/originations.js"></script>
+        <script type="text/javascript" src="/factories/companies.js"></script>
         <script type="text/javascript" src="/controllers/originations.js"></script>
+        <script type="text/javascript" src="/controllers/companies.js"></script>
         <script type="text/javascript" src="/controllers/transactions.js"></script>
         <script type="text/javascript" src="/controllers/fundings.js"></script>
         <script type="text/javascript" src="/controllers/maps.js"></script>
@@ -41,7 +47,6 @@
 
     <body>
         <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
-
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -75,12 +80,106 @@
                     <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
                 </div>
             </div> -->
+
             <div class="container-fluid dashboard-container">
+
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" ng-controller='totalTransactionCtrl'>
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-list fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ totalTransactions }}</div>
+                                        <div>Applications</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                            <div class="panel-footer" ui-sref='transactions'>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading" ng-controller="totalOffersCtrl">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ totalOffers }}</div>
+                                        <div>Offers</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                            <div class="panel-footer"  ui-sref='offers'>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6"> 
+                        <div class="panel panel-yellow"  ng-controller="totalFundingCtrl">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-usd fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ totalFundingAmount | currency }}</div>
+                                        <div>Fundings</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                            <div class="panel-footer"   ui-sref='fundings'>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading" ng-controller="totalCompanyCtrl">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ total }}</div>
+                                        <div>Clients</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                            <div class="panel-footer"   ui-sref='companies'>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div ui-view></div>
 
                 <!-- Example row of columns -->
-                
                 <hr>
                 <footer>
                     <p>&copy; NorthBrook Financial Technologies 2014</p>

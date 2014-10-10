@@ -2,7 +2,12 @@
     <div class="col-md-6" ng-controller="transactionsCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Transactions <span class="label label-info">{{ todays.length }}</span></h3>
+                <h4>
+                <i class="fa fa-list fa-fw"></i> Applications
+                <div class="pull-right">
+                    <span class="label label-info">{{ todays.length }}</span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body gridStyle" ng-grid="gridOptions">
 
@@ -12,7 +17,12 @@
     <div class="col-md-3" ng-controller="originationCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Orginations  <span class="label label-info">{{ totalOriginations }}</span></h3>
+                <h4>
+                <i class="fa fa-list fa-fw"></i> Originations
+                <div class="pull-right">
+                    <span class="label label-info">{{ totalOriginations }}</span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body gridStyle" ng-grid="originationGridOptions">
 
@@ -22,7 +32,12 @@
     <div class="col-md-3" ng-controller="fundingCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Fundings <span class="label label-info">{{ totalFundings }}</span></h3>
+                <h4>
+                <i class="fa fa-usd fa-fw"></i> Fundings
+                <div class="pull-right">
+                    <span class="label label-info">{{ totalFundings }}</span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
             </div>
@@ -33,8 +48,13 @@
 <div class="row" >
     <div class="col-md-5" ng-controller="mapCtrl" >
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Map <span class="label label-info">{{ total }}</span></h3>
+           <div class="panel-heading">
+                <h4>
+                <i class="fa fa-globe fa-fw"></i> Map
+                <div class="pull-right">
+                    <span class="label label-info">{{ total }}</span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body">
                 <map style="display:block; height:300px" center="[43.7,-79.4]" zoom="6"/>
@@ -45,7 +65,12 @@
     <div class="col-md-4" ng-controller="propertyUseCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Property Usage <span class="label label-info">{{ total }}</span></h3>
+                <h4>
+                <i class="fa fa-home fa-fw"></i> Property Use
+                <div class="pull-right">
+                    <span class="label label-info">{{ total }}</span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body"  style="height: 330px" >
                 <nvd3-pie-chart
@@ -67,16 +92,21 @@
         </div>
     </div>
 
-<!-- </div> -->
+    <!-- </div> -->
 
- <!--<div class="row" >-->
+    <!--<div class="row" >-->
     <div class="col-md-3" ng-controller="gradeTierCtrl" >
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Grades <span class="label label-info">{{ total }}</span></h3>
+         <div class="panel-heading">
+                <h4>
+                <i class="fa fa-puzzle-piece fa-fw"></i> Grades
+                <div class="pull-right">
+                    <span class="label label-info">{{ total }}</span>
+                </div>
+                </h4>
             </div>
-             <div class="panel-body gridStyle" ng-grid="gridOptions" style="height: 330px">
-                
+            <div class="panel-body gridStyle" ng-grid="gridOptions" style="height: 330px">
+
             </div>
         </div>
     </div>
