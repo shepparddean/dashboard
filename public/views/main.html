@@ -1,5 +1,5 @@
 <div class="row" >
-    <div class="col-md-6" ng-controller="transactionsCtrl">
+    <div class="col-md-6" ng-controller="transactionVolumeCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -9,7 +9,8 @@
                 </div>
                 </h4>
             </div>
-            <div class="panel-body gridStyle" ng-grid="gridOptions">
+            <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+            <div class="panel-body gridStyle" google-chart chart="chart">
 
             </div>
         </div>
@@ -48,7 +49,7 @@
 <div class="row" >
     <div class="col-md-5" ng-controller="mapCtrl" >
         <div class="panel panel-default">
-           <div class="panel-heading">
+            <div class="panel-heading">
                 <h4>
                 <i class="fa fa-globe fa-fw"></i> Map
                 <div class="pull-right">
@@ -72,8 +73,11 @@
                 </div>
                 </h4>
             </div>
-            <div class="panel-body"  style="height: 330px" >
-                <nvd3-pie-chart
+            <div class="panel-body" style="height: 330px" >
+                <div google-chart chart="chart" style="width:100%; height: 100%">
+                </div>
+
+                <!--                 <nvd3-pie-chart
                 data       ="data"
                 id         ="id"
 
@@ -88,6 +92,8 @@
                 showLabels ="true">
                 <svg height="300"></svg>
                 </nvd3-pie-chart>
+                -->
+
             </div>
         </div>
     </div>
@@ -97,7 +103,7 @@
     <!--<div class="row" >-->
     <div class="col-md-3" ng-controller="gradeTierCtrl" >
         <div class="panel panel-default">
-         <div class="panel-heading">
+            <div class="panel-heading">
                 <h4>
                 <i class="fa fa-puzzle-piece fa-fw"></i> Grades
                 <div class="pull-right">
@@ -106,7 +112,6 @@
                 </h4>
             </div>
             <div class="panel-body gridStyle" ng-grid="gridOptions" style="height: 330px">
-
             </div>
         </div>
     </div>

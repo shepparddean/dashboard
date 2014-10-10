@@ -1,5 +1,8 @@
 // main.js
-var app = angular.module('dashboardApp', ['ngGrid', 'ngMap', 'nvd3ChartDirectives', 'ui.router',
+var app = angular.module('dashboardApp', ['ngGrid', 'ngMap',
+	//'nvd3ChartDirectives',
+	'googlechart',
+	'ui.router',
 	'originationController',
 	'transactionController',
 	'companyController',
@@ -41,12 +44,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	})
 
 
-	// .state('offers', {
-	// 	url: '/offers/:transactionId',
-	// 	templateUrl: '/views/transactionOffers.html',
-	// 	controller: 'transactionOffersCtrl'
-	// });
-
 	$urlRouterProvider.otherwise('/main');
-
 });
