@@ -1,73 +1,241 @@
 angular.module('chartsController', [])
 
 
-.controller('transactionVolumeCtrl', function($scope, $http,Originations) {
-    
+/**
+ * This controller provides a break down of the total number of originations
+ * for the calendar year by month.
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('transactionVolumeCtrl', function($scope, $http, Originations) {
 
-    $scope.chart = {};
+	//Months identifiers
+	var JAN = 0,
+		FEB = 1,
+		MAR = 2,
+		APR = 3,
+		MAY = 4,
+		JUN = 5,
+		JUL = 6,
+		AUG = 7,
+		SEP = 8,
+		OCT = 9,
+		NOV = 10,
+		DEC = 11;
 
-    $scope.chart.data = {"cols": [
-        {id: "t", label: "Month", type: "string"},
-        {id: "s", label: "Volume", type: "number"}
-    ], "rows": [
-        {c: [
-            {v: "Jan"},
-            {v: 3},
-        ]},
-        {c: [
-        	{
-        		v: "Feb"},
-        	{	v: 4
-        	}
-        ]},
-        {c: [
-            {v: "Mar"},
-            {v: 31}
-        ]},
-        {c: [
-            {v: "Apr"},
-            {v: 21},
-        ]},
-        {c: [
-            {v: "May"},
-            {v: 21},
-        ]},
-        {c: [
-            {v: "Jun"},
-            {v: 22},
-        ]},
-        {c: [
-            {v: "Jul"},
-            {v: 42},
-        ]},
-        {c: [
-            {v: "Aug"},
-            {v: 32},
-        ]},
-        {c: [
-            {v: "Sep"},
-            {v: 12},
-        ]},
-        {c: [
-            {v: "Oct"},
-            {v: 22},
-        ]},
-        {c: [
-            {v: "Nov"},
-            {v: 21},
-        ]},
-        {c: [
-            {v: "Dec"},
-            {v: 12},
-        ]}
-    ]};
+	var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var dataArray = [],
+		total = 0;
+
+	//populate the default empty data;
+	for (var x = 0; x < 12; x++) {
+		dataArray.push({
+			month: x,
+			monthName: monthNames[x],
+			total: 0
+		});
+	}
+	$scope.chart = {};
 
 
-    // $routeParams.chartType == BarChart or PieChart or ColumnChart...
-    $scope.chart.type = 'LineChart';
-    $scope.chart.options = {
-        'title': 'Volume by Month'
-    }
+
+	//Retreive this years totals
+	Originations.getTotalMonthlyTransactions(new Date().getFullYear())
+		.success(function(data) {
+			$scope.data = data;
+
+			//push the data in the array for the known months
+			$.each($scope.data, function(key, val) {
+				dataArray[val.Month - 1].total = val.Volume;
+			});
+
+			//ok, now build the chart data;
+			$scope.chart.data = {
+				"cols": [{
+					id: "t",
+					label: "Month",
+					type: "string"
+				}, {
+					id: "s",
+					label: "Originations",
+					type: "number"
+				}]
+			};
+
+			var rows = [];
+
+			//need to build the rows;
+			$.each(dataArray, function(key, val) {
+				//have to inject 2 options into each array
+				//first  is the Title
+				//second is the Total, just like the col definition above
+				// var title = val.monthName;
+				// var vol = val.total;
+				rows.push({
+					c: [{
+						v: val.monthName
+					}, {
+						v: val.total
+					}]
+				});
+				total += val.total;
+
+			});
+
+			$scope.chart.data.rows = rows;
+			$scope.total = total;
+
+			$scope.chart.type = 'ColumnChart';
+			$scope.chart.options = {
+				curveType: 'function',
+				'title': 'Volume by Month (' + new Date().getFullYear() + ')',
+				legend: {
+					position: 'bottom'
+				}
+			}
+
+
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+
+
+
+})
+
+
+
+/**
+ * This controller provides a break down of the total number of originations
+ * and fundings for the calendar year by month.
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('transactionVolumeFundingCtrl', function($scope, $http, Reports) {
+
+	//Months identifiers
+	var JAN = 0,
+		FEB = 1,
+		MAR = 2,
+		APR = 3,
+		MAY = 4,
+		JUN = 5,
+		JUL = 6,
+		AUG = 7,
+		SEP = 8,
+		OCT = 9,
+		NOV = 10,
+		DEC = 11;
+
+	var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var dataArray = [],
+		total = 0;
+
+	//populate the default empty data;
+	for (var x = 0; x < 12; x++) {
+		dataArray.push({
+			month: x,
+			monthName: monthNames[x],
+			fundings: 0,
+			originations: 0
+		});
+	}
+	$scope.chart = {}, $scope.totalOriginations = 0, $scope.totalFundings = 0;
+
+
+
+	//Retreive this years totals
+	Reports.getOriginationVsFunding(new Date().getFullYear())
+		.success(function(data) {
+			$scope.data = data;
+
+			//push the data in the array for the known months
+			$.each($scope.data, function(key, val) {
+				if (val.Type == 'Funded') {
+					dataArray[val.Month - 1].fundings += val.TotalAmount;
+					$scope.totalFundings += val.TotalAmount;
+				} else {
+					dataArray[val.Month - 1].originations += val.TotalAmount;
+					$scope.totalOriginations += val.TotalAmount;
+
+				}
+			});
+
+			//ok, now build the chart data;
+			$scope.chart.data = {
+				"cols": [{
+					id: "month",
+					label: "Month",
+					type: "string"
+				}, {
+					id: "originations",
+					label: "Originations",
+					type: "number"
+				}, {
+					id: "fundings",
+					label: 'Fundings',
+					type: 'number'
+				}]
+			};
+
+			var rows = [];
+
+			//need to build the rows;
+			$.each(dataArray, function(key, val) {
+				//have to inject 2 options into each array
+				//first  is the Title
+				//second is the Total, just like the col definition above
+				// var title = val.monthName;
+				// var vol = val.total;
+				rows.push({
+					c: [{
+						v: val.monthName
+					}, {
+						v: val.originations
+					}, {
+						v: val.fundings
+					}]
+				});
+				//total += val.total;
+
+			});
+
+
+			$scope.chart.data.rows = rows;
+
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+	// $routeParams.chartType == BarChart or PieChart or ColumnChart...
+	$scope.chart.type = 'ColumnChart';
+	$scope.chart.options = {
+		curveType: 'function',
+		isStacked: true,
+		'title': 'Originations Vs Fundings $',
+		legend: {
+			position: 'bottom'
+		}
+	}
 
 
 })
@@ -86,13 +254,13 @@ angular.module('chartsController', [])
 
 
 
-	 chart1.options = {
-        displayExactValues: true,
-        // width: 400,
-        // height: 200,
-        is3D: true
-       // chartArea: {left:10,top:10,bottom:0,height:"100%"}
-    };
+	chart1.options = {
+		displayExactValues: true,
+		// width: 400,
+		// height: 200,
+		is3D: true
+		// chartArea: {left:10,top:10,bottom:0,height:"100%"}
+	};
 
 
 	Originations.getFundingsByPropertyUse()
@@ -109,35 +277,8 @@ angular.module('chartsController', [])
 			console.log('Error: ', data);
 		});
 
-	
-	// chart1.formatters = {
- //      number : [{
- //        columnNum: 1,
- //        pattern: "$ #,##0.00"
- //      }]
- //    };
 
-    $scope.chart = chart1;
+	$scope.chart = chart1;
 
-
-	// $scope.xFunction = function() {
-	// 	return function(d) {
-	// 		return d.PropertyUse;
-	// 	};
-	// }
-
-
-	// $scope.yFunction = function() {
-	// 	return function(d) {
-	// 		return d.Total;
-	// 	};
-	// }
-
-
-	// $scope.descriptionFunction = function() {
-	// 	return function(d) {
-	// 		return d.key;
-	// 	}
-	// }
 
 });

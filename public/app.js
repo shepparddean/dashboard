@@ -10,7 +10,8 @@ var app = angular.module('dashboardApp', ['ngGrid', 'ngMap',
 	'mapController',
 	'chartsController',
 	'originationService',
-	'companyService'
+	'companyService',
+	'reportService'
 ]);
 
 
@@ -19,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
 
 	.state('main', {
-		url: '/main',
+		url: '/',
 		templateUrl: '/views/main.html'
 	})
 
@@ -33,6 +34,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: '/views/offers.html'
 	})
 
+	.state('offers2', {
+		url : '/offers/:transactionId',
+		templateUrl: '/views/transactionOffers.html'
+	})
+
 	.state('companies', {
 		url: '/companies',
 		templateUrl: '/views/companies.html'
@@ -44,5 +50,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	})
 
 
-	$urlRouterProvider.otherwise('/main');
+	$urlRouterProvider.otherwise('/');
 });

@@ -5,7 +5,7 @@
                 <h4>
                 <i class="fa fa-list fa-fw"></i> Applications
                 <div class="pull-right">
-                    <span class="label label-info">{{ todays.length }}</span>
+                    <span class="label label-info">{{ total }}</span>
                 </div>
                 </h4>
             </div>
@@ -15,7 +15,23 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3" ng-controller="originationCtrl">
+        <div class="col-md-6" ng-controller="transactionVolumeFundingCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                <i class="fa fa-list fa-fw"></i> Applications vs Fundings
+                <div class="pull-right">
+                    <span class="label label-primary">{{ totalOriginations | currency  }}</span>&nbsp;<span class="label label-danger">{{ totalFundings | currency  }} </span>
+                </div>
+                </h4>
+            </div>
+            <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+            <div class="panel-body gridStyle" google-chart chart="chart">
+
+            </div>
+        </div>
+    </div>
+<!--     <div class="col-md-3" ng-controller="originationCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -43,7 +59,7 @@
             <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <div class="row" >

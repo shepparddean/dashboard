@@ -2,7 +2,12 @@
     <div class="col-md-12" ng-controller="transactionsCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Applications <span class="label label-info">{{ todays.length }}</span></h3>
+				<h4>
+                <i class="fa fa-list fa-fw"></i> Applications
+                <div class="pull-right">
+                    <span class="label label-info">{{ todays.length }} </span>
+                </div>
+                </h4>
             </div>
             <div class="panel-body gridStyle" ng-grid="gridOptions">
 

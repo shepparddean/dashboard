@@ -18,6 +18,9 @@ angular.module('originationService', [])
 			return $http.get('/api/mortgages/count');
 		},
 
+		getTotalMonthlyTransactions: function(year) {
+			return $http.get('/api/mortgages/year/' + year);
+		},
 
 		getOffers: function() {
 			return $http.get('/api/offers');

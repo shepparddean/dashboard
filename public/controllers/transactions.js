@@ -27,7 +27,7 @@ angular.module('transactionController', [])
 			field: 'totalOffers',
 			displayName: 'Offers',
 			cellClass: 'text-center',
-			cellTemplate: '<div ui-sref="offers({transactionId: row.entity.TransactionID})"><h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5></div>'
+			cellTemplate: '<div ui-sref="offers2({transactionId: row.entity.TransactionID})"><h5><span class="label label-success">{{row.getProperty(col.field)}}</span></h5></div>'
 		}]
 
 
@@ -52,7 +52,6 @@ angular.module('transactionController', [])
 
 	Originations.getTotalTransactions()
 		.success(function(data) {
-			console.log('Total ', data);
 			$scope.totalTransactions = data[0].Total;
 		})
 		.error(function(data) {

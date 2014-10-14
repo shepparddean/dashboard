@@ -1,7 +1,13 @@
 <div class="col-md-12" ng-controller="fundingCtrl">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Fundings <span class="label label-info">{{ totalFundings }}</span></h3>
+		
+		<h4>
+                <i class="fa fa-usd fa-fw"></i> Fundings
+                <div class="pull-right">
+                    <span class="label label-info">{{ totalFundings }} </span>
+                </div>
+                </h4>
 		</div>
 		<div class="panel-body gridStyle" ng-grid="fundingGridOptions">
 		</div>

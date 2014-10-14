@@ -10,7 +10,7 @@ module.exports = function(app) {
 	//Mortgage Routes
 	//======================================================================================
 
-	 /**
+	/**
 	 * This method returns all of the originations
 	 * @param  {[type]} req
 	 * @param  {[type]} res
@@ -77,6 +77,39 @@ module.exports = function(app) {
 				' WHERE B.PrimaryBorrower = 1 ' +
 				//' AND F.inputDate = CAST(GETDATE() AS DATE) ' +
 				' Order by TransactionID desc';
+
+
+			request.query(sqlQuery, function(err, recordset) {
+				if (err) {
+					res.send(err);
+				} else {
+					res.send(recordset);
+				}
+			});
+
+		});
+
+	});
+
+
+	/**
+	 * Retreives all mortgages that have been originated in the designated year,
+	 * grouping them by month and returning the totals;
+	 * 
+	 * @param  {[type]} req
+	 * @param  {[type]} res
+	 * @return {[type]}
+	 */
+	app.get('/api/mortgages/year/:year', function(req, res) {
+
+		//@todo - Have to find a way to move this connection details to a pool
+		var connection = new sql.Connection(database, function(err) {
+			var request = new sql.Request(connection);
+			var sqlQuery =
+				"Select    count(F.FileID) as Volume , month(F.InputDate) as Month " +
+				"FROM      [File] F  " +
+				"WHERE     year(F.InputDate) = "  + req.params.year  +
+				"GROUP BY  month(F.InputDate) ";
 
 
 			request.query(sqlQuery, function(err, recordset) {

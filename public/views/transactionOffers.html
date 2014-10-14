@@ -2,8 +2,15 @@
     <div class="col-md-12" ng-controller="transactionOffersCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Offers <span class="label label-info">{{ offers.length }}</span></h3>
-            </div>
+				<h4>
+                <i class="fa fa-tasks fa-fw"></i> Offers
+                <div class="pull-right">
+                    <span class="label label-info">{{ offers.length }} </span>
+                </div>
+                </h4>
+
+
+            <!-- </div> -->
             <div class="panel-body gridStyle" ng-grid="gridOptions">
 
             </div>

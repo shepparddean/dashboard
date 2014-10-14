@@ -41,7 +41,6 @@ module.exports = function(app) {
 
 
 
-
 	/**
 	 * This method returns all of the fundings
 	 * @param  {[type]} req

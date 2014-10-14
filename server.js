@@ -32,6 +32,7 @@ require('./routes/fundings')(app);
 require('./routes/offers')(app);
 require('./routes/companies')(app);
 require('./routes/users')(app);
+require('./routes/reports')(app);
 
 
 

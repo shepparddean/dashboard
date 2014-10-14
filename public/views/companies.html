@@ -2,7 +2,13 @@
     <div class="col-md-12" ng-controller="companiesCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Clients <span class="label label-info">{{ companies.length }}</span></h3>
+	<h4>
+                <i class="fa fa-list fa-fw"></i> Clients
+                <div class="pull-right">
+                    <span class="label label-info">{{ companies.length }} </span>
+                </div>
+                </h4>
+
             </div>
             <div class="panel-body gridStyle" ng-grid="gridOptions">
 
