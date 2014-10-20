@@ -24,6 +24,13 @@ module.exports = function(app) {
 		});
 	});
 
+	/**
+	 * This method returns the total number of companies that are registered in the system.
+	 * 
+	 * @param  {[type]} req
+	 * @param  {[type]} res
+	 * @return {[type]}
+	 */
 	app.get('/api/companies/count', function(req, res) {
 
 		//@todo - Have to find a way to move this connection details to a pool

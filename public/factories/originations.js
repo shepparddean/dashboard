@@ -36,7 +36,7 @@ angular.module('originationService', [])
 
 
 		getFundings: function() {
-			return $http.get('/api/fundings/today');
+			return $http.get('/api/fundings');
 		},
 
 		getTotalFundedAmount: function() {

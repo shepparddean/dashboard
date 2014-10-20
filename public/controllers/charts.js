@@ -1,6 +1,378 @@
 angular.module('chartsController', [])
 
 
+
+/**
+ * Builds a simple bar chart, showing outstanding applications by Asset Type;
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('applicationsOutstandingCtrl', function($scope, $http, Reports) {
+
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var total = 0;
+
+	$scope.chart = {};
+
+
+	//Retreive this years totals
+	Reports.getOutstandingApplicationsByAssetType()
+		.success(function(data) {
+
+
+			$scope.data = data;
+
+			//ok, now build the chart data;
+			$scope.chart.data = {
+				"cols": [{
+					id: "t",
+					label: "Asset Type",
+					type: "string"
+				}, {
+					id: "s",
+					label: "Outstanding",
+					type: "number"
+				}]
+			};
+
+			var rows = [];
+
+			//push the data in the array for the known months
+			$.each($scope.data, function(key, val) {
+				rows.push({
+					c: [{
+						v: val.AssetType
+					}, {
+						v: val.Total
+					}]
+				});
+
+
+				total += val.Total;
+
+			});
+
+			console.log('total is ', total);
+
+
+			$scope.chart.data.rows = rows;
+			$scope.total = total;
+
+			$scope.chart.type = 'BarChart';
+			$scope.chart.options = {
+				curveType: 'function',
+				// 'title': 'Outstanding Applications by Asset Class',
+				legend: {
+					position: 'bottom'
+				}
+			}
+
+
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+
+
+})
+
+
+
+
+/**
+ * Builds a simple bar chart, showing outstanding applications by Asset Type;
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('fundingByFunderCtrl', function($scope, $http, Reports) {
+
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var total = 0;
+
+	$scope.chart = {};
+
+
+
+	//Retreive this years totals
+	Reports.getFundingsByFunder()
+		.success(function(data) {
+
+
+			$scope.data = data;
+
+			//ok, now build the chart data;
+			$scope.chart.data = {
+				"cols": [{
+					id: "t",
+					label: "Funder",
+					type: "string"
+				}, {
+					id: "s",
+					label: "Total Funded",
+					type: "number"
+				}]
+			};
+
+			var rows = [];
+
+			//push the data in the array for the known months
+			$.each($scope.data, function(key, val) {
+
+				rows.push({
+					c: [{
+						v: val.CompanyName
+					}, {
+						v: val.Total
+					}]
+				});
+
+
+				total += val.Total;
+
+			});
+
+
+			$scope.chart.data.rows = rows;
+			$scope.total = total;
+
+			$scope.chart.type = 'BarChart';
+			$scope.chart.options = {
+				curveType: 'function',
+				// 'title': 'Fundings by Funder',
+				legend: {
+					position: 'bottom'
+				}
+			}
+
+
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+
+
+})
+
+
+/**
+ * Builds a simple bar chart, showing outstanding applications by Asset Type;
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('FunderOriginatedCtrl', function($scope, $http, Reports) {
+
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var total = 0;
+
+	$scope.chart = {};
+
+
+
+	//Retreive this years totals
+	Reports.getFunderOriginatedAndClosed()
+		.success(function(data) {
+
+
+			$scope.data = data;
+
+			//ok, now build the chart data;
+			$scope.chart.data = {
+				"cols": [{
+					id: "t",
+					label: "Funder",
+					type: "string"
+				}, {
+					id: "s",
+					label: "Total Closed",
+					type: "number"
+				}]
+			};
+
+			var rows = [];
+
+			//push the data in the array for the known months
+			$.each($scope.data, function(key, val) {
+
+				rows.push({
+					c: [{
+						v: val.CompanyName
+					}, {
+						v: val.Total
+					}]
+				});
+
+
+				total += val.Total;
+
+			});
+
+
+			$scope.chart.data.rows = rows;
+			$scope.total = total;
+
+			$scope.chart.type = 'BarChart';
+			$scope.chart.options = {
+				curveType: 'function',
+				// 'title': 'Funder Originated or Referred',
+				legend: {
+					position: 'bottom'
+				}
+			}
+
+
+
+		})
+		.error(function(data) {
+			console.log('Error: ', data);
+		});
+
+
+
+})
+
+
+/**
+ * Builds a simple bar chart, showing funded applications by Asset Type by period;
+ *
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @param  {[type]} Originations
+ * @return {[type]}
+ */
+.controller('fundingByPeriodCtrl', function($scope, $http, Reports) {
+
+
+	//This array will hold the raw values from the service
+	//Once the service response is processed, this array can
+	//be used to build the chart data;
+	var total = 0;
+
+	$scope.chart = {};
+	$scope.startDate;
+
+	if ($scope.startDate == undefined) {
+		//default it to the first of this year;
+		$scope.startDate = new Date(new Date().getFullYear(), 0, 1).customFormat("#YYYY#-#MM#-#DD#");
+		$scope.endDate = new Date(new Date().getFullYear(), 11, 31).customFormat("#YYYY#-#MM#-#DD#");
+		
+	}
+
+	$scope.runReport = function(startDate, endDate) {
+
+		Reports.getFundedDealsByPeriod(new Date(startDate).getTime(), new Date(endDate).getTime())
+			.success(function(data) {
+
+
+				$scope.data = data;
+
+				//ok, now build the chart data;
+				$scope.chart.data = {
+					"cols": [{
+						id: "t",
+						label: "Asset Class",
+						type: "string"
+					}, {
+						id: "s",
+						label: "Total Funded",
+						type: "number"
+					}]
+				};
+
+				var rows = [];
+
+				//push the data in the array for the known months
+				$.each($scope.data, function(key, val) {
+
+					rows.push({
+						c: [{
+							v: val.AssetClass
+						}, {
+							v: val.Total
+						}]
+					});
+
+
+					total += val.Total;
+
+				});
+
+
+				$scope.chart.data.rows = rows;
+				$scope.total = total;
+
+				$scope.chart.type = 'BarChart';
+				$scope.chart.options = {
+					curveType: 'function',
+					// 'title': 'Funded by Period',
+					legend: {
+						position: 'bottom'
+					}
+				}
+
+
+
+			})
+			.error(function(data) {
+				console.log('Error: ', data);
+			});
+
+	},
+
+
+	$scope.refresh = function logIn(startDate, endDate) {
+
+		$scope.runReport($scope.startDate, $scope.endDate);
+
+
+		// if (email !== undefined && password !== undefined) {
+
+		// 	UserService.logIn(email, password)
+
+		// 	.success(function(data) {
+		// 		AuthenticationService.isLogged = true;
+		// 		$scope.login.error = false;
+		// 		$window.sessionStorage.token = data.token;
+		// 		// $location.path("/admin");
+
+		// 	}).error(function(data, status) {
+		// 		$scope.login.errormessage = 'Got it wrong bud';
+		// 		$scope.login.error = true;
+		// 	});
+		// }
+	}
+
+
+
+	//run the report first time
+	$scope.runReport($scope.startDate, $scope.endDate);
+
+
+
+
+
+})
 /**
  * This controller provides a break down of the total number of originations
  * for the calendar year by month.
@@ -92,7 +464,7 @@ angular.module('chartsController', [])
 			$scope.chart.data.rows = rows;
 			$scope.total = total;
 
-			$scope.chart.type = 'ColumnChart';
+			$scope.chart.type = 'LineChart';
 			$scope.chart.options = {
 				curveType: 'function',
 				'title': 'Volume by Month (' + new Date().getFullYear() + ')',
@@ -230,7 +602,7 @@ angular.module('chartsController', [])
 	$scope.chart.type = 'ColumnChart';
 	$scope.chart.options = {
 		curveType: 'function',
-		isStacked: true,
+		// isStacked: true,
 		'title': 'Originations Vs Fundings $',
 		legend: {
 			position: 'bottom'

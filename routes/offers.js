@@ -6,6 +6,13 @@ var database = require('../config/database');
 
 module.exports = function(app) {
 
+
+	/**
+	 * Returns the count of offers where the status is not incompete.
+	 * @param  {[type]} req
+	 * @param  {[type]} res
+	 * @return {[type]}
+	 */
 	app.get('/api/offers/count', function(req, res) {
 
 		//@todo - Have to find a way to move this connection details to a pool

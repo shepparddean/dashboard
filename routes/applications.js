@@ -5,11 +5,6 @@ var database = require('../config/database');
 
 module.exports = function(app) {
 
-
-
-	//Mortgage Routes
-	//======================================================================================
-
 	/**
 	 * This method returns all of the originations
 	 * @param  {[type]} req
@@ -38,8 +33,6 @@ module.exports = function(app) {
 
 		});
 	});
-
-
 
 
 	/**
@@ -149,4 +142,8 @@ module.exports = function(app) {
 		});
 
 	});
+
+
+
+	
 }

@@ -1,9 +1,9 @@
-<div class="row" >
-    <div class="col-md-6" ng-controller="transactionVolumeCtrl">
+<div class="row">
+    <div class="col-md-6" ng-controller="applicationsOutstandingCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
-                <i class="fa fa-list fa-fw"></i> Applications
+                <i class="fa fa-ioxhost fa-fw"></i> Oustanding
                 <div class="pull-right">
                     <span class="label label-info">{{ total }}</span>
                 </div>
@@ -15,13 +15,33 @@
             </div>
         </div>
     </div>
-        <div class="col-md-6" ng-controller="transactionVolumeFundingCtrl">
+    <div class="col-md-6" ng-controller="fundingByFunderCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
-                <i class="fa fa-list fa-fw"></i> Applications vs Fundings
+                <i class="fa fa-bank fa-fw"></i> Fundings by Funder
                 <div class="pull-right">
-                    <span class="label label-primary">{{ totalOriginations | currency  }}</span>&nbsp;<span class="label label-danger">{{ totalFundings | currency  }} </span>
+                    <span class="label label-info">{{ total }}</span>
+                </div>
+                </h4>
+            </div>
+            <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+            <div class="panel-body gridStyle" google-chart chart="chart" >
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-6" ng-controller="FunderOriginatedCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                <i class="fa fa-shekel fa-fw"></i> Funder Originated/Referred
+                <div class="pull-right">
+                    <span class="label label-info">{{ total }}</span>
                 </div>
                 </h4>
             </div>
@@ -31,104 +51,164 @@
             </div>
         </div>
     </div>
-<!--     <div class="col-md-3" ng-controller="originationCtrl">
+
+    <div class="col-md-6" ng-controller="fundingByPeriodCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
-                <i class="fa fa-list fa-fw"></i> Originations
+                <i class="fa fa-line-chart fa-fw"></i> Funded by Period
                 <div class="pull-right">
-                    <span class="label label-info">{{ totalOriginations }}</span>
+                    <span class="label label-info">{{ total }}</span>
                 </div>
                 </h4>
             </div>
-            <div class="panel-body gridStyle" ng-grid="originationGridOptions">
+            <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+            <div>
+                <!-- <form class="form-inline" role="form" style="padding: 5px 0 5px 30px; margin-bottom: 0px;"> -->
+                <form class="form-inline" role="form"  style="padding: 5px 0 5px 30px; margin-bottom: 0px;">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="date" class="form-control input-sm" id="startDate" placeholder="Start" ng-model="startDate">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" type="date" placeholder="End" ng-model="endDate">
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-primary btn-md" ng-click="refresh(startDate,endDate)" title="Click to update chart"><i class="fa fa-refresh"></i></a>
 
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="panel-body gridStyle" google-chart chart="chart">
             </div>
         </div>
     </div>
-    <div class="col-md-3" ng-controller="fundingCtrl">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                <i class="fa fa-usd fa-fw"></i> Fundings
-                <div class="pull-right">
-                    <span class="label label-info">{{ totalFundings }}</span>
-                </div>
-                </h4>
-            </div>
-            <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
-            </div>
-        </div>
-    </div> -->
 </div>
-
+</div>
+</div>
 <div class="row" >
-    <div class="col-md-5" ng-controller="mapCtrl" >
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                <i class="fa fa-globe fa-fw"></i> Map
-                <div class="pull-right">
-                    <span class="label label-info">{{ total }}</span>
-                </div>
-                </h4>
-            </div>
-            <div class="panel-body">
-                <map style="display:block; height:300px" center="[43.7,-79.4]" zoom="6"/>
-            </div>
+<div class="col-md-6" ng-controller="transactionVolumeCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-list fa-fw"></i> Applications
+        <div class="pull-right">
+            <span class="label label-info">{{ total }}</span>
         </div>
+        </h4>
     </div>
-
-    <div class="col-md-4" ng-controller="propertyUseCtrl">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                <i class="fa fa-home fa-fw"></i> Property Use
-                <div class="pull-right">
-                    <span class="label label-info">{{ total }}</span>
-                </div>
-                </h4>
-            </div>
-            <div class="panel-body" style="height: 330px" >
-                <div google-chart chart="chart" style="width:100%; height: 100%">
-                </div>
-
-                <!--                 <nvd3-pie-chart
-                data       ="data"
-                id         ="id"
-
-                x          ="xFunction()"
-                y          ="yFunction()"
-                showLegend = "true"
-                tooltips   = "true"
-                labelType  = "percent"
-                pieLabelsOutside = "true"
-                donut      = "false"
-                donutRatio = ".25"
-                showLabels ="true">
-                <svg height="300"></svg>
-                </nvd3-pie-chart>
-                -->
-
-            </div>
+    <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+    <div class="panel-body gridStyle" google-chart chart="chart">
+    </div>
+</div>
+</div>
+<div class="col-md-6" ng-controller="transactionVolumeFundingCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-list fa-fw"></i> Applications vs Fundings
+        <div class="pull-right">
+            <span class="label label-primary">{{ totalOriginations | currency  }}</span>&nbsp;<span class="label label-danger">{{ totalFundings | currency  }} </span>
         </div>
+        </h4>
     </div>
-
-    <!-- </div> -->
-
-    <!--<div class="row" >-->
-    <div class="col-md-3" ng-controller="gradeTierCtrl" >
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                <i class="fa fa-puzzle-piece fa-fw"></i> Grades
-                <div class="pull-right">
-                    <span class="label label-info">{{ total }}</span>
-                </div>
-                </h4>
-            </div>
-            <div class="panel-body gridStyle" ng-grid="gridOptions" style="height: 330px">
-            </div>
+    <!-- <div class="panel-body gridStyle" ng-grid="gridOptions"> -->
+    <div class="panel-body gridStyle" google-chart chart="chart">
+    </div>
+</div>
+</div>
+<!--     <div class="col-md-3" ng-controller="originationCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-list fa-fw"></i> Originations
+        <div class="pull-right">
+            <span class="label label-info">{{ totalOriginations }}</span>
         </div>
+        </h4>
     </div>
+    <div class="panel-body gridStyle" ng-grid="originationGridOptions">
+    </div>
+</div>
+</div>
+<div class="col-md-3" ng-controller="fundingCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-usd fa-fw"></i> Fundings
+        <div class="pull-right">
+            <span class="label label-info">{{ totalFundings }}</span>
+        </div>
+        </h4>
+    </div>
+    <div class="panel-body gridStyle" ng-grid="fundingGridOptions">
+    </div>
+</div>
+</div> -->
+</div>
+<div class="row" >
+<div class="col-md-6" ng-controller="mapCtrl" >
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-globe fa-fw"></i> Map
+        <div class="pull-right">
+            <span class="label label-info">{{ total }}</span>
+        </div>
+        </h4>
+    </div>
+    <div class="panel-body">
+        <map style="display:block; height:300px" center="[43.7,-79.4]" zoom="6"/>
+    </div>
+</div>
+</div>
+<div class="col-md-6" ng-controller="propertyUseCtrl">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-home fa-fw"></i> Property Use
+        <div class="pull-right">
+            <span class="label label-info">{{ total }}</span>
+        </div>
+        </h4>
+    </div>
+    <div class="panel-body" style="height: 330px" >
+        <div google-chart chart="chart" style="width:100%; height: 100%">
+        </div>
+        <!--                 <nvd3-pie-chart
+        data       ="data"
+        id         ="id"
+        x          ="xFunction()"
+        y          ="yFunction()"
+        showLegend = "true"
+        tooltips   = "true"
+        labelType  = "percent"
+        pieLabelsOutside = "true"
+        donut      = "false"
+        donutRatio = ".25"
+        showLabels ="true">
+        <svg height="300"></svg>
+        </nvd3-pie-chart>
+        -->
+    </div>
+</div>
+</div>
+<!-- </div> -->
+<!--<div class="row" >-->
+<div class="col-md-6" ng-controller="gradeTierCtrl" >
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+        <i class="fa fa-puzzle-piece fa-fw"></i> Grades
+        <div class="pull-right">
+            <span class="label label-info">{{ total }}</span>
+        </div>
+        </h4>
+    </div>
+    <div class="panel-body gridStyle" ng-grid="gridOptions" style="height: 330px">
+    </div>
+</div>
+</div>
 </div>

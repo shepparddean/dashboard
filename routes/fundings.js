@@ -47,7 +47,7 @@ module.exports = function(app) {
 	 * @param  {[type]} res
 	 * @return {[type]}
 	 */
-	app.get('/api/fundings/today', function(req, res) {
+	app.get('/api/fundings', function(req, res) {
 
 		//@todo - Have to find a way to move this connection details to a pool
 		var connection = new sql.Connection(database, function(err) {

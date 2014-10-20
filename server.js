@@ -3,6 +3,9 @@
 // BASE SETUP
 // =============================================================================
 
+//just include some js?
+var utilities = require('./js/utilities');
+
 // call the packages we need
 var express        = require('express'); // call express
 var app            = express(); // define our app using express
@@ -10,9 +13,6 @@ var sql            = require('mssql'); // microsoft sql driver
 var morgan         = require('morgan'); // log requests to the console (express4)
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-
-
-
 
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
@@ -33,7 +33,6 @@ require('./routes/offers')(app);
 require('./routes/companies')(app);
 require('./routes/users')(app);
 require('./routes/reports')(app);
-
 
 
 
