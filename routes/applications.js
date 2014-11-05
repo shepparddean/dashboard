@@ -26,8 +26,10 @@ module.exports = function(app) {
 			request.query(sqlQuery, function(err, recordset) {
 				if (err) {
 					res.send(err);
+					connection.close();
 				} else {
 					res.send(recordset);
+					connection.close();
 				}
 			});
 
@@ -75,8 +77,10 @@ module.exports = function(app) {
 			request.query(sqlQuery, function(err, recordset) {
 				if (err) {
 					res.send(err);
+					connection.close();
 				} else {
 					res.send(recordset);
+					connection.close();
 				}
 			});
 
@@ -108,8 +112,10 @@ module.exports = function(app) {
 			request.query(sqlQuery, function(err, recordset) {
 				if (err) {
 					res.send(err);
+					connection.close();
 				} else {
 					res.send(recordset);
+					connection.close();
 				}
 			});
 
@@ -134,8 +140,10 @@ module.exports = function(app) {
 			request.query(sqlQuery, function(err, recordset) {
 				if (err) {
 					res.send(err);
+					connection.close();
 				} else {
 					res.send(recordset);
+					connection.close();
 				}
 			});
 

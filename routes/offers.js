@@ -29,6 +29,8 @@ module.exports = function(app) {
 				} else {
 					res.send(recordset);
 				}
+
+				connection.close();
 			});
 
 		});
@@ -58,6 +60,8 @@ module.exports = function(app) {
 				} else {
 					res.send(recordset);
 				}
+
+				connection.close();
 			});
 
 		});
@@ -91,6 +95,8 @@ module.exports = function(app) {
 				} else {
 					res.send(recordset);
 				}
+
+				connection.close();
 			});
 
 		});

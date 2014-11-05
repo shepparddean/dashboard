@@ -11,10 +11,6 @@ module.exports = function(app) {
 	// =============================================================================
 	app.post('/api/users', function(req, res) {
 
-
-		console.log('The Name = [', req.body.name, ']');
-		console.log('The pass = [', req.body.password, ']');
-
 		User.create({
 			name: req.body.name, // set the user name (comes from the request)
 			password: req.body.password
